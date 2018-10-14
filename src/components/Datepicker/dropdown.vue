@@ -23,7 +23,11 @@
     <div class="datepicker__days">
       <span
         @click="handleDayClick(day)"
-        :class="[{['datepicker__day--disabled']: day.disabled}, {['datepicker__day--selected']: day.selected}, 'datepicker__day']"
+        :class="[
+          {['datepicker__day--disabled']: day.disabled}, 
+          {['datepicker__day--selected']: day.selected}, 
+          'datepicker__day'
+        ]"
         v-for="(day, index) in days" 
         :key="index">{{ day.text }}
       </span>

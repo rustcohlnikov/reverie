@@ -4,9 +4,9 @@
     v-on-clickaway="handleClickAway">
 
     <input
-      v-model="inputValue"
-      :disabled="pDisabled"
-      class="datepicker__input" 
+      readonly
+      v-model="displayValue"
+      :class="[{['datepicker__input--disabled']: pDisabled}, 'datepicker__input']" 
       type="text"
       placeholder="Pick a date"
       @click="handleInputClick">
@@ -62,23 +62,28 @@ export default {
   data () {
     return {
       inputValue: '',
+      displayValue: '',
       isOpen: false
     }
   },
   methods: {
     init () {
-      const value = this.pValue ? moment(this.pValue) : moment()
-      this.inputValue = value.format(this.pDisplayFormat)
+      const date = this.pValue ? moment(this.pValue) : moment()
+      this.setDateValues(date)
     },
     handleInputClick () {
-      this.isOpen = !this.isOpen
+      this.isOpen = !this.pDisabled && !this.isOpen
     },
     handleClickAway () {
       this.close()
     },
     handleChange (date) {
-      this.inputValue = date.format(this.pDisplayFormat)
+      this.setDateValues(date)
       this.close()
+    },
+    setDateValues (value) {
+      this.inputValue = value.format(this.pFormat)
+      this.displayValue = value.format(this.pDisplayFormat)
     },
     close () {
       this.isOpen = false
@@ -90,8 +95,7 @@ export default {
     }
   },
   beforeMount () {
-    require(`moment/locale/${this.pLanguage}`)
-    moment.locale(this.pLanguage)
+    moment.locale('en')
     this.init()  
   },
   components: { DatepickerDropdown },

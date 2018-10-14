@@ -20,9 +20,15 @@ export default {
     return {
       date: '07.07.2019',
       format: 'DD.MM.YYYY',
-      displayFormat: 'D MMM, dddd',
-      language: 'ru',
-      disabledDates: ['30.10.2018'],
+      displayFormat: 'D MMMM, dddd',
+      language: 'en',
+      disabledDates: [
+        '26.10.2018',
+        '27.10.2018',
+        '28.10.2018',
+        '29.10.2018',
+        '30.10.2018'
+      ],
       isDisabled: false
     }
   }
