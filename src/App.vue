@@ -4,7 +4,8 @@
       <ReverieDatepicker 
         :p-value="date"
         :p-format="format"
-        :p-language="language"/>
+        :p-language="language"
+        :p-disabled-dates="disabled"/>
     </div>
   </div>
 </template>
@@ -18,7 +19,8 @@ export default {
     return {
       date: '07.07.2019',
       format: 'DD.MM.YYYY',
-      language: 'ru'
+      language: 'ru',
+      disabled: ['03.07.2019']
     }
   }
 };

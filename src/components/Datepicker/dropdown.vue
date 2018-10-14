@@ -2,14 +2,14 @@
   <div class="datepicker__dropdown">
     <div class="datepicker__header">
       <span 
-        @click="previous" 
+        @click="previousMonth" 
         class="datepicker__arrow">←</span>
       <h3 
         class="datepicker__month-name">
         {{ monthName }}
       </h3>
       <span 
-        @click="next" 
+        @click="nextMonth" 
         class="datepicker__arrow">→</span>
     </div>
     <div class="datepicker__weekdays">
@@ -22,8 +22,8 @@
 
     <div class="datepicker__days">
       <span
-        @click="handleDayClick(day.date, day.format)"
-        :class="[{['datepicker__day--disabled']: !day.active}, {['datepicker__day--selected']: day.selected}, 'datepicker__day']"
+        @click="handleDayClick(day)"
+        :class="[{['datepicker__day--disabled']: day.disabled}, {['datepicker__day--selected']: day.selected}, 'datepicker__day']"
         v-for="(day, index) in days" 
         :key="index">{{ day.text }}
       </span>
@@ -81,47 +81,44 @@ export default {
     constructDayCell (item, index) {
       const date = index + 1
       const momentDate = this.currentViewDate.clone().date(date)
+      const formattedDate = momentDate.format(this.pFormat)
       const obj = {
         text: date,
         date: momentDate,
-        format: momentDate.format(this.pFormat),
-        active: true,
+        format: formattedDate,
+        disabled: this.pDisabledDates.includes(formattedDate),
         selected: momentDate.isSame(this.selectedDate, 'day')
       }
       
       return obj
     },
     constructOtherDays () {
-      // Fill up empty dates from the previous month
+      // Fill up empty dates from the previous month by
+      // getting the weekday number of the first day of the current month
+
       var emptyDays = this.currentViewDate.date(1).day()
       return Array(emptyDays).fill('').map(() => ({
-        active: false
+        disabled: true
       }))
     },
     setMonth (step) {
       const month = this.currentViewDate.get('month') + step
       this.currentViewDate = this.currentViewDate.clone().month(month)
     },
-    previous () {      
+    previousMonth () {      
      this.setMonth(-1)
     },
-    next () {
+    nextMonth () {
       this.setMonth(1)
     },
-    handleDayClick (date, formatted) {
-      this.selectedDate = this.normalizeDate(date)
-      this.$emit('change', date, formatted)
+    handleDayClick ({date, formatted, disabled}) {
+      if (!disabled) {
+        this.selectedDate = this.normalizeDate(date)
+        this.$emit('change', date, formatted)
+      }      
     },
     normalizeDate (date) {
       return date.startOf('day')
-    }
-  },
-  watch: {
-    pValue () {
-      console.log(this.pValue)
-    },
-    currentViewDate () {
-      console.log(this.currentViewDate.format('MMMM'))
     }
   }
 };

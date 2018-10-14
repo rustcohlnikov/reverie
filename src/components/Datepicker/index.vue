@@ -65,7 +65,6 @@ export default {
   methods: {
     init () {
       this.inputValue = this.pValue ? this.pValue : moment().format(this.pFormat)
-      //console.log(this.format)
     },
     handleInputClick () {
       this.isOpen = !this.isOpen

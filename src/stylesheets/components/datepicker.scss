@@ -86,10 +86,13 @@
     cursor: pointer;
 
     &:hover {
-      background: #ededed;
+      border-radius: 100%;
+      background: $hover;
     }
 
     &--disabled {
+      color: $disabled;
+      cursor: default;
       &:hover {
         user-select: none;
         background: transparent;
