@@ -98,9 +98,9 @@ export default {
     },
     constructOtherDays () {
       // Fill up empty dates from the previous month by
-      // getting the weekday number of the first day of the current month
+      // getting the locale aware weekday number of the first day of the current month
 
-      var emptyDays = this.currentViewDate.date(1).day()
+      var emptyDays = this.currentViewDate.date(1).weekday()
       return Array(emptyDays).fill('').map(() => ({
         disabled: true
       }))

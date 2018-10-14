@@ -6,7 +6,11 @@
         :p-display-format="displayFormat"
         :p-language="language"
         :p-disabled="isDisabled"
-        :p-disabled-dates="disabledDates"/>
+        :p-disabled-dates="disabledDates"
+        
+        @change="handleDateChange"
+        @open="handleOpen"
+        @close="handleClose"/>
     </div>
   </div>
 </template>
@@ -31,6 +35,11 @@ export default {
       ],
       isDisabled: false
     }
+  },
+  methods: {
+    handleDateChange () {},
+    handleOpen () {},
+    handleClose () {}
   }
 };
 </script>

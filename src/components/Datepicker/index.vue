@@ -6,7 +6,8 @@
     <input
       readonly
       v-model="displayValue"
-      :class="[{['datepicker__input--disabled']: pDisabled}, 'datepicker__input']" 
+      :class="[{['datepicker__input--disabled']: pDisabled}, 'datepicker__input']"
+      :name="pName"
       type="text"
       placeholder="Pick a date"
       @click="handleInputClick">
@@ -22,6 +23,7 @@
 </template>
 <script type="text/javascript">
 import moment from 'moment'
+import 'moment/locale/ru'
 
 import { mixin as clickaway } from 'vue-clickaway'
 
@@ -73,6 +75,7 @@ export default {
     },
     handleInputClick () {
       this.isOpen = !this.pDisabled && !this.isOpen
+      this.$emit(this.isOpen ? 'open' : 'close')
     },
     handleClickAway () {
       this.close()
@@ -84,9 +87,12 @@ export default {
     setDateValues (value) {
       this.inputValue = value.format(this.pFormat)
       this.displayValue = value.format(this.pDisplayFormat)
+
+      this.$emit('change', value,  this.inputValue, this.displayValue)
     },
     close () {
       this.isOpen = false
+      this.$emit('close')
     }
   },
   computed: {
@@ -95,7 +101,7 @@ export default {
     }
   },
   beforeMount () {
-    moment.locale('en')
+    moment.locale(this.pLanguage)
     this.init()  
   },
   components: { DatepickerDropdown },
