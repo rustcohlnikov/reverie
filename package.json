@@ -1,0 +1,50 @@
+{
+  "name": "reverie",
+  "version": "1.0.0",
+  "description": "Minimalistic Vue Datepicker",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --hot --config webpack.config.js",
+    "build": "npm run lint && webpack --mode production",
+    "lint": "eslint --ext .js,.vue src"
+  },
+  "keywords": [
+    "datepicker",
+    "vue"
+  ],
+  "browserslist": ">1%",
+  "author": "rustcohlnikov",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.22.2",
+    "vue": "^2.5.17",
+    "vue-clickaway": "^2.2.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
