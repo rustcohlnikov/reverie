@@ -1,0 +1,62 @@
+.datepicker {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  font-family: $sans;
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+
+    font-size: 1rem;
+    padding-left: 1rem;
+    color: $text;
+    width: 100%;
+    height: $height;
+
+    background-color: $white;
+    box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+
+    cursor: pointer;
+  }
+
+  &__dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: $white;
+    padding: .5rem;
+    color: $text;
+    box-shadow: 2px 2px 2px 1px rgba(173,171,173,0.47);
+    margin-top: .5rem;
+  }
+
+  &__header {
+    padding: .5rem 0;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__arrow {
+    cursor: pointer;
+  }
+
+  &__month-name {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__weekdays {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 0;
+    color: $accent;
+  }
+}
