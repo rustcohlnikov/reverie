@@ -8,7 +8,7 @@
       :disabled="pDisabled"
       class="datepicker__input" 
       type="text"
-      placeholder="Выберите дату"
+      placeholder="Pick a date"
       @click="handleInputClick">
 
     <DatepickerDropdown
@@ -29,11 +29,11 @@ import DatepickerDropdown from './dropdown'
 export default {
   name: 'ReverieDatepicker',
   props: {
-   /*  pValue: {
+   pValue: {
       type: String,
       default: new Date(),
       required: true
-    }, */
+    },
     pName: {
       type: String,
       default: 'datepicker'
@@ -53,24 +53,27 @@ export default {
   },
   data () {
     return {
-      inputValue: '12.12.2018',
-      isOpen: false,
-      currentDate: new Date()
+      inputValue: '',
+      isOpen: false
     }
   },
   methods: {
     init () {
-      const today = moment()
+      this.inputValue = this.pValue ? this.pValue : moment().format(this.pFormat)
       //console.log(this.format)
     },
     handleInputClick () {
       this.isOpen = !this.isOpen
     },
     handleClickAway () {
-      this.isOpen = false
+      this.close()
     },
-    handleChange (date) {
-      console.log(`Changed to ${date}`)
+    handleChange (date, formattedDate) {
+      this.inputValue = formattedDate
+      this.close()
+    },
+    close () {
+      this.isOpen = false
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
-      <ReverieDatepicker :p-value="date"/>
+      <ReverieDatepicker :p-value="date" :p-format="format"/>
     </div>    
   </div>
 </template>
@@ -13,7 +13,8 @@ export default {
   components: {ReverieDatepicker},
   data () {
     return {
-      date: '12/05/2019'
+      date: '07.07.2019',
+      format: 'DD.MM.YYYY'
     }
   }
 };
