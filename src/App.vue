@@ -1,12 +1,12 @@
 <template>
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
-      <ReverieDatepicker 
-        :p-value="date"
+      <ReverieDatepicker
         :p-format="format"
         :p-display-format="displayFormat"
         :p-language="language"
-        :p-disabled-dates="disabled"/>
+        :p-disabled="isDisabled"
+        :p-disabled-dates="disabledDates"/>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
       format: 'DD.MM.YYYY',
       displayFormat: 'D MMM, dddd',
       language: 'ru',
-      disabled: ['03.07.2019']
+      disabledDates: ['30.10.2018'],
+      isDisabled: false
     }
   }
 };

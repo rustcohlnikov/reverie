@@ -8,6 +8,12 @@
     box-sizing: border-box;
   }
 
+  & [disabled] {
+    user-select: none;
+    cursor: default;
+    background-color: $disabled-input;
+  }
+
   &__input {
     border: none;
     outline: none;
@@ -91,7 +97,7 @@
     }
 
     &--disabled {
-      color: $disabled;
+      color: $disabled-date;
       cursor: default;
       &:hover {
         user-select: none;

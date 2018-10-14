@@ -32,8 +32,7 @@ export default {
   props: {
    pValue: {
       type: String,
-      default: new Date(),
-      required: true
+      default: ''
     },
     pName: {
       type: String,

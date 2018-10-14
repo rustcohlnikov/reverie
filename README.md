@@ -17,8 +17,10 @@ export default {
     return {
       date: '07.07.2019',
       format: 'DD.MM.YYYY',
+      displayFormat: 'D MMM, dddd',
       language: 'ru',
-      disabled: ['03.07.2019']
+      disabled: ['03.07.2019'],
+      isDisabled: true
     }
   }
 }
@@ -28,8 +30,10 @@ export default {
 <ReverieDatepicker 
   :p-value="date"
   :p-format="format"
+  :p-display-format="displayFormat"
   :p-language="language"
-  :p-disabled-dates="disabled"/>
+  :p-disabled="isDisabled"
+  :p-disabled-dates="disabledDates"/>/>
 ```
 
 
