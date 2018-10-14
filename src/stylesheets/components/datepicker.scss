@@ -95,5 +95,10 @@
         background: transparent;
       }
     }
+
+    &--selected {
+      background-color: $light-accent;
+      border-radius: 100%;
+    }
   }
 }

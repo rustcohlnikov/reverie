@@ -1,8 +1,11 @@
 <template>
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
-      <ReverieDatepicker :p-value="date" :p-format="format"/>
-    </div>    
+      <ReverieDatepicker 
+        :p-value="date"
+        :p-format="format"
+        :p-language="language"/>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
@@ -14,7 +17,8 @@ export default {
   data () {
     return {
       date: '07.07.2019',
-      format: 'DD.MM.YYYY'
+      format: 'DD.MM.YYYY',
+      language: 'ru'
     }
   }
 };
@@ -22,6 +26,7 @@ export default {
 <style lang="scss">
 html, body {
   height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
   margin: 0;
   line-height: 1.15;

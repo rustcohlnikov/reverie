@@ -22,6 +22,7 @@
 </template>
 <script type="text/javascript">
 import moment from 'moment'
+
 import { mixin as clickaway } from 'vue-clickaway'
 
 import DatepickerDropdown from './dropdown'
@@ -49,6 +50,10 @@ export default {
     pFormat: {
      type: String,
      default: 'DD.MM.YYYY' 
+    },
+    pLanguage: {
+     type: String,
+     default: 'ru' 
     }
   },
   data () {
@@ -82,6 +87,8 @@ export default {
     }
   },
   beforeMount () {
+    require(`moment/locale/${this.pLanguage}`)
+    moment.locale(this.pLanguage)
     this.init()  
   },
   components: { DatepickerDropdown },
