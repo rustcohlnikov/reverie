@@ -111,10 +111,10 @@ export default {
     nextMonth () {
       this.setMonth(1)
     },
-    handleDayClick ({date, formatted, disabled}) {
+    handleDayClick ({date, disabled}) {
       if (!disabled) {
         this.selectedDate = this.normalizeDate(date)
-        this.$emit('change', date, formatted)
+        this.$emit('change', date)
       }      
     },
     normalizeDate (date) {

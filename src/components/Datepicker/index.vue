@@ -51,6 +51,10 @@ export default {
      type: String,
      default: 'DD.MM.YYYY' 
     },
+    pDisplayFormat: {
+     type: String,
+     default: 'D MMM, dddd'
+    },
     pLanguage: {
      type: String,
      default: 'ru' 
@@ -64,7 +68,8 @@ export default {
   },
   methods: {
     init () {
-      this.inputValue = this.pValue ? this.pValue : moment().format(this.pFormat)
+      const value = this.pValue ? moment(this.pValue) : moment()
+      this.inputValue = value.format(this.pDisplayFormat)
     },
     handleInputClick () {
       this.isOpen = !this.isOpen
@@ -72,8 +77,8 @@ export default {
     handleClickAway () {
       this.close()
     },
-    handleChange (date, formattedDate) {
-      this.inputValue = formattedDate
+    handleChange (date) {
+      this.inputValue = date.format(this.pDisplayFormat)
       this.close()
     },
     close () {
