@@ -2,7 +2,7 @@
   "name": "reverie",
   "version": "1.0.0",
   "description": "Minimalistic Vue Datepicker",
-  "main": "src/entry/production.js",
+  "main": "dist/reverie.js",
   "directories": {
     "test": "tests"
   },
