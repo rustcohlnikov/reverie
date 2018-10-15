@@ -27,7 +27,7 @@ import moment from 'moment'
 import isString from 'lodash.isstring'
 import 'moment/locale/ru'
 
-import config from "@/config.js"
+import config from "../../config.js"
 import { mixin as clickaway } from 'vue-clickaway'
 import DatepickerDropdown from './dropdown'
 
