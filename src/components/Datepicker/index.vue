@@ -6,19 +6,20 @@
     <input
       readonly
       v-model="displayValue"
-      :class="[{['datepicker__input--disabled']: pDisabled}, 'datepicker__input']"
-      :name="pName"
+      :class="[{['datepicker__input--disabled']: disabled}, 'datepicker__input']"
+      :name="name"
       type="text"
       placeholder="Pick a date"
       @click="handleInputClick">
 
     <DatepickerDropdown
       v-if="isOpen"
-      :p-disabled-dates="pDisabledDates"
-      :p-value="inputValue"
-      :p-format="pFormat"
+      :disabled-dates="disabledDates"
+      :value="inputValue"
+      :format="format"
       
-      @change="handleChange"/>  
+      @select="handleDateSelect"
+      @changeMonth="handleMonthChange" />  
   </div>
 </template>
 <script type="text/javascript">
@@ -33,34 +34,34 @@ import DatepickerDropdown from './dropdown'
 export default {
   name: 'ReverieDatepicker',
   props: {
-   pValue: {
+   value: {
       type: [String, Object],
       default: '',
       validator: (value) => {
         return moment.isMoment(value) || isString(value)
       }
     },
-    pName: {
+    name: {
       type: String,
       default: config.inputName
     },
-    pDisabled: {
+    disabled: {
       type: Boolean,
       default: false
     },
-    pDisabledDates: {
+    disabledDates: {
       type: Array,
       default: () => []
     },
-    pFormat: {
+    format: {
      type: String,
      default: config.format 
     },
-    pDisplayFormat: {
+    displayFormat: {
      type: String,
      default: config.displayFormat
     },
-    pLanguage: {
+    language: {
      type: String,
      default: config.language,
      validator: (value) => {
@@ -77,25 +78,28 @@ export default {
   },
   methods: {
     init () {
-      const date = this.checkValue(this.pValue)
+      const date = this.checkValue(this.value)
       this.setDateValues(date)
     },
     handleInputClick () {
-      this.isOpen = !this.pDisabled && !this.isOpen
+      this.isOpen = !this.disabled && !this.isOpen
       this.$emit(this.isOpen ? 'open' : 'close')
     },
     handleClickAway () {
       this.close()
     },
-    handleChange (date) {
+    handleDateSelect (date) {
       this.setDateValues(date)
       this.close()
     },
+    handleMonthChange () {
+      this.$emit('monthChange')
+    },
     setDateValues (value) {
-      this.inputValue = value.format(this.pFormat)
-      this.displayValue = value.format(this.pDisplayFormat)
+      this.inputValue = value.format(this.format)
+      this.displayValue = value.format(this.displayFormat)
 
-      this.$emit('change', value,  this.inputValue, this.displayValue)
+      this.$emit('select', value,  this.inputValue, this.displayValue)
     },
     close () {
       this.isOpen = false
@@ -106,17 +110,12 @@ export default {
       if (date && moment.isMoment(date)) {
         return date
       } else {
-        return date ? moment(date, this.pFormat) : moment()
+        return date ? moment(date, this.format) : moment()
       }
     }
   },
-  computed: {
-    format () {
-      return moment(this.pValue)
-    }
-  },
   beforeMount () {
-    moment.locale(this.pLanguage)
+    moment.locale(this.language)
     this.init()  
   },
   components: { DatepickerDropdown },

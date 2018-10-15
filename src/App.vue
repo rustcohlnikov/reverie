@@ -1,17 +1,19 @@
 <template>
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
+      <input type="text" v-model="date">
       <ReverieDatepicker
-        :p-value="date"
-        :p-format="format"
-        :p-display-format="displayFormat"
-        :p-language="language"
-        :p-disabled="isDisabled"
-        :p-disabled-dates="disabledDates"
+        v-model="date"
+        :format="format"
+        :display-format="displayFormat"
+        :language="language"
+        :disabled="isDisabled"
+        :disabled-dates="disabledDates"
         
-        @change="handleDateChange"
+        @select="handleDateSelect"
         @open="handleOpen"
-        @close="handleClose"/>
+        @close="handleClose"
+        @monthChange="handleMonthChange"/>
     </div>
   </div>
 </template>
@@ -24,7 +26,7 @@ export default {
   data () {
     return {
       // Demo values
-      date: '25.10.2018',
+      date: '15.10.2018',
       format: 'DD.MM.YYYY',
       displayFormat: 'D MMMM, dddd',
       language: 'en',
@@ -39,7 +41,8 @@ export default {
     }
   },
   methods: {
-    handleDateChange () {},
+    handleDateSelect () {},
+    handleMonthChange () {},
     handleOpen () {},
     handleClose () {}
   }

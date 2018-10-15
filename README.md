@@ -4,42 +4,55 @@
 
 Minimalistic Vue Datepicker
 
-Demo is [here](https://dist-riukoxrszo.now.sh)
+## Demo 
+View [here](https://dist-riukoxrszo.now.sh)
 
 ## Installation
 ```js
-import ReverieDatepicker from 'reverie'
-```
+import ReverieDatepicker from 'Components/Datepicker'
 
-```js
 export default {
   name: 'App',
   components: {ReverieDatepicker},
   data () {
     return {
-      date: '07.07.2019',
+      // Demo values
+      date: '15.10.2018',
       format: 'DD.MM.YYYY',
-      displayFormat: 'D MMM, dddd',
-      language: 'ru',
-      disabled: ['03.07.2019'],
-      isDisabled: true
+      displayFormat: 'D MMMM, dddd',
+      language: 'en',
+      disabledDates: [
+        '26.10.2018',
+        '27.10.2018',
+        '28.10.2018',
+        '29.10.2018',
+        '30.10.2018'
+      ],
+      isDisabled: false
     }
+  },
+  methods: {
+    handleDateSelect () {},
+    handleMonthChange () {},
+    handleOpen () {},
+    handleClose () {}
   }
-}
+};
 ```
 
 ```html
-<ReverieDatepicker 
-  :p-value="date"
-  :p-format="format"
-  :p-display-format="displayFormat"
-  :p-language="language"
-  :p-disabled="isDisabled"
-  :p-disabled-dates="disabledDates"
-
-  @change="handleDateChange"
+ <ReverieDatepicker
+  v-model="date"
+  :format="format"
+  :display-format="displayFormat"
+  :language="language"
+  :disabled="isDisabled"
+  :disabled-dates="disabledDates"
+  
+  @select="handleDateSelect"
   @open="handleOpen"
-  @close="handleClose"/>
+  @close="handleClose"
+  @monthChange="handleMonthChange"/>
 ```
 ## Development
 
@@ -58,7 +71,7 @@ npm run dev
 | pFormat                       | String          | DD.MM.YYYY  | Moment date format                       |
 | pDisabledDates                | Array           | []          | Array of dates to disable in pFormat     |
 | pDisplayFormat                | String          | D MMM, dddd | Moment date format for display           |
-| pLanguage                     | String          | ru          | Moment locale (ru || en)                 |
+| pLanguage                     | String          | ru          | Moment locale (ru or en)                 |
 
 ## Events
 
@@ -67,6 +80,7 @@ npm run dev
 | change                        | Moment          |             | Date selected                            |
 | open                          |                 |             | Dropdown is opened                       |
 | close                         |                 |             | Dropdown is closed                       |
+| monthChange                   |                 |             | Month change                             |
 
 ## Date formatting
 

@@ -55,22 +55,22 @@ export default {
     }
   },
   props: {
-    pValue: {
+    value: {
       type: String,
       default: ''
     },
-    pDisabledDates: {
+    disabledDates: {
       type: Array,
       default: () => []
     },
-    pFormat: {
+    format: {
      type: String,
      default: config.format
     }
   },
   beforeMount () {
-    this.currentViewDate = this.pValue ? moment(this.pValue, this.pFormat) : moment()
-    this.selectedDate = this.pValue ? moment(this.pValue, this.pFormat) : moment()
+    this.currentViewDate = this.value ? moment(this.value, this.format) : moment()
+    this.selectedDate = this.value ? moment(this.value, this.format) : moment()
     this.weekdays = moment.weekdaysShort(true)
   },
   methods: {
@@ -83,12 +83,12 @@ export default {
     constructDay (day, index) {
       const date = index + 1
       const momentDate = this.currentViewDate.clone().date(date)
-      const formattedDate = momentDate.format(this.pFormat)
+      const formattedDate = momentDate.format(this.format)
       const obj = {
         text: date,
         date: momentDate,
         format: formattedDate,
-        disabled: this.pDisabledDates.includes(formattedDate),
+        disabled: this.disabledDates.includes(formattedDate),
         selected: momentDate.isSame(this.selectedDate, 'day'),
         empty: false
       }
@@ -107,6 +107,7 @@ export default {
     setMonth (step) {
       const month = this.currentViewDate.get('month') + step
       this.currentViewDate = this.currentViewDate.clone().month(month)
+      this.$emit('changeMonth')
     },
     previousMonth () {      
      this.setMonth(-1)
@@ -115,7 +116,7 @@ export default {
       this.setMonth(1)
     },
     handleDayClick (date) {
-      this.$emit('change', date) 
+      this.$emit('select', date) 
     }
   },
   components: { DayCell }
