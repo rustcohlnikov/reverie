@@ -5,7 +5,7 @@
 Minimalistic Vue Datepicker
 
 ## Demo 
-View [here](https://dist-evyavuwqhs.now.sh)
+View [here](https://dist-xvefutimes.now.sh)
 
 ## Installation
 ```js
@@ -40,19 +40,19 @@ npm run dev
 
 | Prop                          | Type            | Default     | Description                              |
 |-------------------------------|-----------------|-------------|------------------------------------------|
-| pValue                        | String          |             | Date value of the datepicker             |
-| pName                         | String          | datepicker  | Input name                               |
-| pDisabled                     | Boolean         | false       | To disable datepicker                    |
-| pFormat                       | String          | DD.MM.YYYY  | Moment date format                       |
-| pDisabledDates                | Array           | []          | Array of dates to disable in pFormat     |
-| pDisplayFormat                | String          | D MMM, dddd | Moment date format for display           |
-| pLanguage                     | String          | ru          | Moment locale (ru or en)                 |
+| value                         | String          |             | Date value of the datepicker             |
+| name                          | String          | datepicker  | Input name                               |
+| disabled                      | Boolean         | false       | To disable datepicker                    |
+| format                        | String          | DD.MM.YYYY  | Moment date format                       |
+| disabledDates                 | Array           | []          | Array of dates to disable in format      |
+| displayFormat                 | String          | D MMM, dddd | Moment date format for display           |
+| language                      | String          | en          | Moment locale (ru or en)                 |
 
 ## Events
 
 | Prop                          | Type            | Default     | Description                              |
 |-------------------------------|-----------------|-------------|------------------------------------------|
-| select                        | Moment          |             | Date selected                            |
+| select                        |                 |             | Date selected                            |
 | open                          |                 |             | Dropdown is opened                       |
 | close                         |                 |             | Dropdown is closed                       |
 | month-change                  |                 |             | Month change                             |

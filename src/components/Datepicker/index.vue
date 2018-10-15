@@ -101,7 +101,7 @@ export default {
       this.inputValue = value.format(this.validFormat)
       this.displayValue = value.format(this.validDisplayFormat)
 
-      this.$emit('select', this.inputValue)
+      this.$emit('select', value, this.inputValue)
       this.$emit('input', this.inputValue)    
     },
     close () {
