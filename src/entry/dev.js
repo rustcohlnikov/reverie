@@ -2,7 +2,8 @@ import Vue from 'vue';
 import App from '@/App.vue'
 import 'Stylesheets/main.scss'
 
-new Vue({
-  el: '#reverie',
-  render: h => h(App),
-});
+const app = new Vue({
+  ...App
+})
+
+app.$mount('#reverie')

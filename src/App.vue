@@ -2,6 +2,7 @@
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
       <ReverieDatepicker
+        :p-value="date"
         :p-format="format"
         :p-display-format="displayFormat"
         :p-language="language"
@@ -22,7 +23,8 @@ export default {
   components: {ReverieDatepicker},
   data () {
     return {
-      date: '07.07.2019',
+      // Demo values
+      date: '25.10.2018',
       format: 'DD.MM.YYYY',
       displayFormat: 'D MMMM, dddd',
       language: 'en',

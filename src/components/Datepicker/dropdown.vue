@@ -21,21 +21,19 @@
     </div>
 
     <div class="datepicker__days">
-      <span
-        @click="handleDayClick(day)"
-        :class="[
-          {['datepicker__day--disabled']: day.disabled}, 
-          {['datepicker__day--selected']: day.selected}, 
-          'datepicker__day'
-        ]"
-        v-for="(day, index) in days" 
-        :key="index">{{ day.text }}
-      </span>
+      <DayCell
+        @click="handleDayClick"
+        v-for="(day, index) in days"
+        :key="index"
+        :p-day="day"/>
     </div>
   </div>
 </template>
 <script type="text/javascript">
 import moment from 'moment'
+import DayCell from './dayCell'
+
+import config from "@/config.js"
 
 export default {
   name: 'DatepickerDropdown',
@@ -48,11 +46,11 @@ export default {
   },
   computed: {
     monthName () {
-      return this.currentViewDate.format('MMMM YYYY')
+      return this.currentViewDate.format(config.monthNameFormat)
     },
     days () {
       const days = this.constructDays()     
-      const otherDays = this.constructOtherDays()
+      const otherDays = this.constructPreviousMonthDays()
       return [...otherDays,...days]
     }
   },
@@ -67,7 +65,7 @@ export default {
     },
     pFormat: {
      type: String,
-     default: 'DD.MM.YYYY' 
+     default: config.format
     }
   },
   beforeMount () {
@@ -78,11 +76,11 @@ export default {
   methods: {
     constructDays () {
       const currentMonthDays = Array(this.currentViewDate.daysInMonth()).fill('')
-      const days = currentMonthDays.map(this.constructDayCell)
+      const days = currentMonthDays.map(this.constructDay)
 
       return days
     },
-    constructDayCell (item, index) {
+    constructDay (day, index) {
       const date = index + 1
       const momentDate = this.currentViewDate.clone().date(date)
       const formattedDate = momentDate.format(this.pFormat)
@@ -91,18 +89,19 @@ export default {
         date: momentDate,
         format: formattedDate,
         disabled: this.pDisabledDates.includes(formattedDate),
-        selected: momentDate.isSame(this.selectedDate, 'day')
+        selected: momentDate.isSame(this.selectedDate, 'day'),
+        empty: false
       }
       
       return obj
     },
-    constructOtherDays () {
+    constructPreviousMonthDays () {
       // Fill up empty dates from the previous month by
       // getting the locale aware weekday number of the first day of the current month
 
       var emptyDays = this.currentViewDate.date(1).weekday()
       return Array(emptyDays).fill('').map(() => ({
-        disabled: true
+        empty: true
       }))
     },
     setMonth (step) {
@@ -115,15 +114,10 @@ export default {
     nextMonth () {
       this.setMonth(1)
     },
-    handleDayClick ({date, disabled}) {
-      if (!disabled) {
-        this.selectedDate = this.normalizeDate(date)
-        this.$emit('change', date)
-      }      
-    },
-    normalizeDate (date) {
-      return date.startOf('day')
+    handleDayClick (date) {
+      this.$emit('change', date) 
     }
-  }
+  },
+  components: { DayCell }
 };
 </script>

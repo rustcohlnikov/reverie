@@ -23,22 +23,26 @@
 </template>
 <script type="text/javascript">
 import moment from 'moment'
+import isString from 'lodash.isstring'
 import 'moment/locale/ru'
 
+import config from "@/config.js"
 import { mixin as clickaway } from 'vue-clickaway'
-
 import DatepickerDropdown from './dropdown'
 
 export default {
   name: 'ReverieDatepicker',
   props: {
    pValue: {
-      type: String,
-      default: ''
+      type: [String, Object],
+      default: '',
+      validator: (value) => {
+        return moment.isMoment(value) || isString(value)
+      }
     },
     pName: {
       type: String,
-      default: 'datepicker'
+      default: config.inputName
     },
     pDisabled: {
       type: Boolean,
@@ -50,15 +54,18 @@ export default {
     },
     pFormat: {
      type: String,
-     default: 'DD.MM.YYYY' 
+     default: config.format 
     },
     pDisplayFormat: {
      type: String,
-     default: 'D MMM, dddd'
+     default: config.displayFormat
     },
     pLanguage: {
      type: String,
-     default: 'ru' 
+     default: config.language,
+     validator: (value) => {
+        return config.supportedLanguages.includes(value)
+      }
     }
   },
   data () {
@@ -70,7 +77,7 @@ export default {
   },
   methods: {
     init () {
-      const date = this.pValue ? moment(this.pValue) : moment()
+      const date = this.checkValue(this.pValue)
       this.setDateValues(date)
     },
     handleInputClick () {
@@ -93,6 +100,14 @@ export default {
     close () {
       this.isOpen = false
       this.$emit('close')
+    },
+    checkValue (date) {
+      // Check if value is a Moment object or a date string
+      if (date && moment.isMoment(date)) {
+        return date
+      } else {
+        return date ? moment(date, this.pFormat) : moment()
+      }
     }
   },
   computed: {
