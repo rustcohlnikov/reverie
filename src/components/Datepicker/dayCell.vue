@@ -12,7 +12,7 @@
 </template>
 <script type="text/javascript">
 export default {
-  name: 'App',
+  name: 'DayCell',
   data () {
     return {
     }

@@ -27,7 +27,7 @@ Vue.use(Reverie)
   @select="handleDateSelect"
   @open="handleOpen"
   @close="handleClose"
-  @monthChange="handleMonthChange"/>
+  @month-change="handleMonthChange"/>
 ```
 ## Development
 
@@ -52,10 +52,10 @@ npm run dev
 
 | Prop                          | Type            | Default     | Description                              |
 |-------------------------------|-----------------|-------------|------------------------------------------|
-| change                        | Moment          |             | Date selected                            |
+| select                        | Moment          |             | Date selected                            |
 | open                          |                 |             | Dropdown is opened                       |
 | close                         |                 |             | Dropdown is closed                       |
-| monthChange                   |                 |             | Month change                             |
+| month-change                  |                 |             | Month change                             |
 
 ## Date formatting
 

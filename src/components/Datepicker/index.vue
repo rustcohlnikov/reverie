@@ -19,7 +19,7 @@
       :format="format"
       
       @select="handleDateSelect"
-      @changeMonth="handleMonthChange" />  
+      @month-change="handleMonthChange" />  
   </div>
 </template>
 <script type="text/javascript">
@@ -50,7 +50,7 @@ export default {
       default: false
     },
     disabledDates: {
-      type: Array,
+      type: [Array, String],
       default: () => []
     },
     format: {
@@ -77,9 +77,11 @@ export default {
     }
   },
   methods: {
-    init () {
-      const date = this.checkValue(this.value)
-      this.setDateValues(date)
+    renderDates (value) {
+      const date = this.createMoment(value)
+      if (date.isValid()) {
+        this.setDateValues(date)
+      }
     },
     handleInputClick () {
       this.isOpen = !this.disabled && !this.isOpen
@@ -93,32 +95,56 @@ export default {
       this.close()
     },
     handleMonthChange () {
-      this.$emit('monthChange')
+      this.$emit('month-change')
     },
-    setDateValues (value) {
-      this.inputValue = value.format(this.format)
-      this.displayValue = value.format(this.displayFormat)
+    setDateValues (value) {     
+      this.inputValue = value.format(this.validFormat)
+      this.displayValue = value.format(this.validDisplayFormat)
 
-      this.$emit('select', value,  this.inputValue, this.displayValue)
+      this.$emit('select', this.inputValue)
+      this.$emit('input', this.inputValue)    
     },
     close () {
       this.isOpen = false
       this.$emit('close')
     },
-    checkValue (date) {
+    createMoment (date) {
       // Check if value is a Moment object or a date string
       if (date && moment.isMoment(date)) {
         return date
       } else {
-        return date ? moment(date, this.format) : moment()
+        return date ? moment(date, this.validFormat) : moment()
       }
     }
   },
   beforeMount () {
     moment.locale(this.language)
-    this.init()  
+    this.renderDates(this.value)  
   },
   components: { DatepickerDropdown },
   mixins: [ clickaway ],
+  computed: {
+    validFormat () {
+      return this.format ? this.format : config.format
+    },
+    validDisplayFormat () {
+      return this.displayFormat ? this.displayFormat : config.displayFormat
+    }
+  },
+  watch: {
+    value (value) {
+      this.renderDates(value)
+      this.$emit('input', this.value) 
+    },
+    displayFormat () {
+      this.renderDates(this.value)
+    },
+    format () {
+      this.renderDates(this.value)
+    },
+    disabledDates () {
+      this.renderDates(this.value)
+    }
+  }
 };
 </script>

@@ -107,7 +107,7 @@ export default {
     setMonth (step) {
       const month = this.currentViewDate.get('month') + step
       this.currentViewDate = this.currentViewDate.clone().month(month)
-      this.$emit('changeMonth')
+      this.$emit('month-change')
     },
     previousMonth () {      
      this.setMonth(-1)
