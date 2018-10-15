@@ -5,7 +5,7 @@
 Minimalistic Vue Datepicker
 
 ## Demo 
-View [here](https://dist-riukoxrszo.now.sh)
+View [here](https://dist-evyavuwqhs.now.sh)
 
 ## Installation
 ```js

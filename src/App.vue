@@ -1,7 +1,6 @@
 <template>
   <div class="reverie-demo">
     <div class="reverie-demo__datepicker">
-      <input type="text" v-model="date">
       <ReverieDatepicker
         v-model="date"
         :format="format"
