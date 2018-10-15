@@ -9,35 +9,10 @@ View [here](https://dist-evyavuwqhs.now.sh)
 
 ## Installation
 ```js
-import ReverieDatepicker from 'Components/Datepicker'
+import Vue from 'vue'
+import Reverie from 'reverie'
 
-export default {
-  name: 'App',
-  components: {ReverieDatepicker},
-  data () {
-    return {
-      // Demo values
-      date: '15.10.2018',
-      format: 'DD.MM.YYYY',
-      displayFormat: 'D MMMM, dddd',
-      language: 'en',
-      disabledDates: [
-        '26.10.2018',
-        '27.10.2018',
-        '28.10.2018',
-        '29.10.2018',
-        '30.10.2018'
-      ],
-      isDisabled: false
-    }
-  },
-  methods: {
-    handleDateSelect () {},
-    handleMonthChange () {},
-    handleOpen () {},
-    handleClose () {}
-  }
-};
+Vue.use(Reverie)
 ```
 
 ```html
