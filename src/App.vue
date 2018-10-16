@@ -5,7 +5,6 @@
       <div class="reverie-demo__datepicker">
         <h4 class="reverie-demo__title">Reverie Datepicker</h4> 
         <ReverieDatepicker
-          v-model="date"
           :format="format"
           :display-format="displayFormat"
           :language="language"
