@@ -5,7 +5,7 @@
 Minimalistic Vue Datepicker
 
 ## Demo 
-View [here](https://dist-xvefutimes.now.sh)
+View [here](https://dist-vxwuxenrip.now.sh)
 
 ## Installation
 ```js

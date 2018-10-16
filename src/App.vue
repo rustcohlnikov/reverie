@@ -2,7 +2,8 @@
   <div class="reverie-demo">
 
     <div class="reverie-demo__main">
-      <div class="reverie-demo__datepicker">    
+      <div class="reverie-demo__datepicker">
+        <h4 class="reverie-demo__title">Reverie Datepicker</h4> 
         <ReverieDatepicker
           v-model="date"
           :format="format"
@@ -16,7 +17,7 @@
           @close="handleClose"
           @month-change="handleMonthChange"/>
       </div>
-      <h4 class="reverie-demo__title">Props</h4>
+      <!-- <h4 class="reverie-demo__title">Props</h4>
       <div class="reverie-demo__settings">
 
         <label for="disabled">
@@ -34,7 +35,7 @@
         <input
           type="text"
           v-model="displayFormat">        
-      </div>      
+      </div>       -->
     </div>
   </div>
 </template>
